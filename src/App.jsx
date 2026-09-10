@@ -31,6 +31,30 @@ export default function Portfolio() {
 
   const projects = [
     {
+      title: "Système de Parking Intelligent (PFE Master)",
+      description: "Projet de Fin d'Études (Master IoT) : Solution IoT globale avec ESP32, capteurs de présence, contrôle d'accès RFID et communication MQTT en temps réel. Application mobile Flutter pour réservations/consultation des places et tableau de bord admin web MERN (supervision temps réel des places, abonnements et utilisateurs).",
+      tech: ["ESP32", "MQTT", "RFID", "Flutter", "Node.js", "Express", "MongoDB"],
+      gradient: "from-blue-500 via-indigo-500 to-purple-500",
+      year: "2025",
+      icon: <Cpu className="text-blue-400" size={24} />
+    },
+    {
+      title: "Poubelle Intelligente & Tri Automatisé",
+      description: "Stage de perfectionnement (Designet Web Agency) : Solution Smart City avec ESP32 (C++). Détection présence (ultrason), identification (humide/sec via capteur d'humidité), tri mécatronique automatique par servomoteur (gauche/droite) et alerte temps réel de remplissage. Dashboard de suivi Web MERN.",
+      tech: ["ESP32", "C++", "Capteurs", "React", "Node.js", "Express", "MongoDB"],
+      gradient: "from-emerald-500 via-teal-500 to-cyan-500",
+      year: "2025",
+      icon: <Sparkles className="text-emerald-400" size={24} />
+    },
+    {
+      title: "SmartPlant IA - Irrigation & Vision IA",
+      description: "Projet académique collaboratif (avec Aïcha Frih & Dawser Belgacem) : Irrigation intelligente pilotée par capteurs IoT et Vision par Ordinateur avec TensorFlow pour la détection automatique des pathologies des plantes. Tableaux de bord interactifs React.js et backend MongoDB.",
+      tech: ["ESP32", "TensorFlow", "Vision par Ordinateur", "React.js", "Node.js", "MongoDB"],
+      gradient: "from-green-500 via-emerald-500 to-teal-500",
+      year: "2024",
+      icon: <Zap className="text-green-400" size={24} />
+    },
+    {
       title: "IntelliFarm - Chatbot Agricole IA",
       description: "Chatbot intelligent basé sur RAG et Streamlit pour l'assistance agricole en temps réel avec moteur d'inférence et base vectorielle",
       tech: ["Streamlit", "RAG", "Azure IoT", "Vector DB", "Python"],
@@ -116,9 +140,21 @@ export default function Portfolio() {
 
   const experience = [
     {
+      title: "Stage PFE - Master IoT",
+      company: "Projet de Fin d'Études",
+      period: "2025",
+      description: "Conception et réalisation d'un système de parking intelligent (ESP32, RFID, MQTT, Flutter, stack MERN)"
+    },
+    {
       title: "Stage de Perfectionnement",
       company: "Designet Web Agency",
       period: "2025",
+      description: "Conception d'une poubelle intelligente pour le tri des déchets (ESP32, capteurs ultrason/humidité, MERN stack)"
+    },
+    {
+      title: "Stage de Perfectionnement",
+      company: "Designet Web Agency",
+      period: "2024",
       description: "Conception du chatbot IntelliFarm avec RAG, déploiement de solutions IA Cloud évolutives"
     },
     {
@@ -126,12 +162,6 @@ export default function Portfolio() {
       company: "Designet Web Agency",
       period: "2024",
       description: "Création de SUPADATA et développement de plateforme e-commerce complète"
-    },
-    {
-      title: "Stage de Perfectionnement",
-      company: "Designet Web Agency",
-      period: "2023",
-      description: "Développement full-stack de site e-commerce avec intégration de paiement en ligne"
     }
   ];
 
@@ -269,7 +299,7 @@ export default function Portfolio() {
             </div>
             <div className="flex items-center gap-2 text-slate-300 bg-slate-900/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-purple-500/20">
               <Mail size={18} className="text-purple-400" />
-              <span>eyaanemer@gmail.com</span>
+              <span>eyanemer2@gmail.com</span>
             </div>
             <div className="flex items-center gap-2 text-slate-300 bg-slate-900/50 px-4 py-2 rounded-lg backdrop-blur-sm border border-purple-500/20">
               <Phone size={18} className="text-purple-400" />
@@ -279,7 +309,7 @@ export default function Portfolio() {
           
           <div className="flex gap-4 flex-wrap justify-center pt-4">
             <a 
-              href="mailto:eyaanemer@gmail.com"
+              href="mailto:eyanemer2@gmail.com"
               className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 via-pink-600 to-rose-600 rounded-xl font-semibold hover:scale-105 transform transition-all shadow-2xl shadow-purple-500/50 overflow-hidden"
             >
               <span className="relative z-10 flex items-center gap-2">
@@ -489,7 +519,7 @@ export default function Portfolio() {
               <Linkedin />
             </a>
             <a 
-              href="mailto:eyaanemer@gmail.com"
+              href="mailto:eyanemer2@gmail.com"
               className="w-16 h-16 bg-slate-800/50 backdrop-blur-sm rounded-2xl flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all hover:scale-110 border border-purple-500/20 hover:shadow-lg hover:shadow-purple-500/50"
             >
               <Mail />
@@ -509,7 +539,7 @@ export default function Portfolio() {
                   <Mail size={20} />
                   <span className="font-semibold">Email</span>
                 </div>
-                <p className="text-slate-300">eyaanemer@gmail.com</p>
+                <p className="text-slate-300">eyanemer2@gmail.com</p>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-purple-400 mb-2">
