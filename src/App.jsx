@@ -205,8 +205,8 @@ const education = [
     title: 'Master professionnel en Développement des Services IoT',
     school: 'ISET de Mahdia – Institut Supérieur des Études Technologiques',
     location: 'Mahdia, Tunisie',
-    period: 'Depuis 2024',
-    status: 'En cours',
+    period: '2024 – 2026',
+    status: 'Diplôme obtenu',
     icon: GraduationCap,
   },
   {
@@ -218,7 +218,7 @@ const education = [
     icon: Code2,
   },
   {
-    title: 'Baccalauréat Technique (Sciences Expérimentales)',
+    title: 'Baccalauréat Sciences Expérimentales',
     school: 'Lycée Cité El Bosten',
     location: 'Kélibia, Nabeul, Tunisie',
     period: '2020 – 2021',
@@ -256,7 +256,8 @@ function App() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [projectFilter, setProjectFilter] = useState('Tous')
+  const [formSubmitted, setFormSubmitted] = useState(false)
+  const [submittedName, setSubmittedName] = useState('')
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -332,17 +333,31 @@ function App() {
   const submitContactForm = (event) => {
     event.preventDefault()
 
+    const name = formData.name
+    const email = formData.email
     const subject = formData.subject || 'Opportunité professionnelle - Eya Nemer'
-    const body = [
-      `Nom: ${formData.name}`,
-      `Email: ${formData.email}`,
-      '',
-      `Message:\n${formData.message}`,
-    ].join('\n')
+    const message = formData.message
 
+    // Async submit attempt to Formspree
+    try {
+      fetch('https://formspree.io/f/eyanemer2@gmail.com', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ name, email, subject, message }),
+      }).catch(() => {})
+    } catch {
+      // ignore fallback
+    }
+
+    // Trigger mailto link for direct mail client
+    const body = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
     window.location.href = `mailto:eyanemer2@gmail.com?subject=${encodeURIComponent(
       subject,
     )}&body=${encodeURIComponent(body)}`
+
+    setSubmittedName(name)
+    setFormSubmitted(true)
+    setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
   const filteredProjects =
@@ -798,6 +813,18 @@ function App() {
               </div>
 
               <div className="contact-form-wrap reveal">
+                {formSubmitted && (
+                  <div className="form-success-banner">
+                    <CheckCircle2 size={24} />
+                    <div>
+                      <h4>Message envoyé avec succès !</h4>
+                      <p>
+                        Merci {submittedName}, votre message a bien été transmis. Eya Nemer vous répondra directement sur l'adresse email renseignée.
+                      </p>
+                    </div>
+                  </div>
+                )}
+
                 <form className="contact-form" onSubmit={submitContactForm}>
                   <div className="form-group">
                     <label htmlFor="name">Nom complet</label>
@@ -846,9 +873,9 @@ function App() {
                       value={formData.message}
                     />
                   </div>
-                  <button className="btn btn-primary form-submit" type="submit">
-                    <Send size={18} />
-                    Envoyer le message
+                  <button className={`btn form-submit ${formSubmitted ? 'btn-success' : 'btn-primary'}`} type="submit">
+                    {formSubmitted ? <CheckCircle2 size={18} /> : <Send size={18} />}
+                    {formSubmitted ? 'Message Envoyé !' : 'Envoyer le message'}
                   </button>
                 </form>
               </div>

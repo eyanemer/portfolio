@@ -970,13 +970,13 @@
 
 .edu-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 18px;
 }
 
 .edu-card {
   display: grid;
-  grid-template-columns: 54px 1fr;
+  grid-template-columns: 50px 1fr;
   gap: 16px;
   padding: 24px;
 }
@@ -985,38 +985,62 @@
   background:
     linear-gradient(135deg, rgba(26, 216, 255, 0.12), transparent 52%),
     #fff;
+  border-color: rgba(26, 216, 255, 0.3);
+}
+
+.edu-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
 }
 
 .edu-badge {
   display: inline-flex;
-  min-height: 28px;
+  min-height: 26px;
   align-items: center;
-  margin-bottom: 10px;
   padding: 0 10px;
   color: var(--blue-2);
   font-size: 0.78rem;
   font-weight: 900;
   background: #eaf4ff;
+  border: 1px solid rgba(0, 87, 255, 0.15);
   border-radius: 999px;
 }
 
-.edu-school {
-  color: var(--ink) !important;
-  font-weight: 850 !important;
-  margin-bottom: 2px !important;
+.edu-badge.in-progress {
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  border-color: rgba(22, 163, 74, 0.25);
 }
 
 .edu-period {
   color: var(--blue-2) !important;
   font-size: 0.86rem !important;
-  margin-bottom: 8px !important;
+  font-weight: 850 !important;
 }
 
-.edu-details {
-  font-size: 0.92rem;
-  line-height: 1.55;
+.edu-school {
+  color: var(--ink) !important;
+  font-weight: 800 !important;
+  font-size: 0.96rem;
+  margin: 6px 0 4px !important;
+}
+
+.edu-location {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   color: #52667d !important;
-  font-weight: 500 !important;
+  font-size: 0.88rem !important;
+  font-weight: 650 !important;
+  margin: 4px 0 0 !important;
+}
+
+.edu-location svg {
+  color: var(--blue-2);
 }
 
 .contact {
@@ -1080,9 +1104,48 @@
 }
 
 .contact-form-wrap {
-  padding: 20px;
+  padding: 24px;
   background: var(--surface);
   border-color: rgba(26, 216, 255, 0.18);
+}
+
+.form-success-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px;
+  margin-bottom: 20px;
+  background: rgba(34, 197, 94, 0.14);
+  border: 1px solid rgba(34, 197, 94, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(34, 197, 94, 0.15);
+  animation: revealUp 350ms ease both;
+}
+
+.form-success-banner svg {
+  color: #22c55e;
+  flex: 0 0 auto;
+  margin-top: 2px;
+}
+
+.form-success-banner h4 {
+  margin: 0 0 4px;
+  color: #ffffff;
+  font-size: 1.05rem;
+  font-weight: 850;
+}
+
+.form-success-banner p {
+  margin: 0;
+  color: #a7f3d0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.btn-success {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #16a34a, #22c55e) !important;
+  box-shadow: 0 12px 30px rgba(34, 197, 94, 0.3) !important;
 }
 
 .contact-form {
