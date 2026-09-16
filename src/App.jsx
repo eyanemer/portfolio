@@ -3,18 +3,23 @@ import {
   ArrowRight,
   Award,
   BrainCircuit,
+  Briefcase,
   BriefcaseBusiness,
+  Check,
   CheckCircle2,
   ChevronUp,
   CircuitBoard,
   Code2,
+  Copy,
   Cpu,
   Database,
   Download,
+  FileCode,
   Filter,
   GraduationCap,
   Layers3,
   Linkedin,
+  Loader2,
   Mail,
   MapPin,
   Menu,
@@ -23,6 +28,7 @@ import {
   Rocket,
   Send,
   Server,
+  ShieldCheck,
   Sparkles,
   Terminal,
   UtensilsCrossed,
@@ -39,14 +45,12 @@ const navItems = [
   { label: 'Expériences', id: 'experience' },
   { label: 'Projets', id: 'projects' },
   { label: 'Formations', id: 'education' },
-  { label: 'Contact', id: 'contact' },
 ]
 
 const roles = [
   'Développeuse Full Stack',
   'Développeuse IoT & Embarqué',
-  'Conceptrice de Dashboards MERN',
-  'Intégratrice IA & RAG',
+
 ]
 
 const stats = [
@@ -96,10 +100,10 @@ const skillGroups = [
 
 const experiences = [
   {
-    title: 'Stage de PFE Master',
-    badge: 'Master IoT',
-    company: 'ISET Mahdia',
-    period: '2025',
+    title: 'Stage de PFE ',
+    badge: 'Master ',
+    company: 'be coders',
+    period: '2026',
     project: 'Système de Parking Intelligent Connecté',
     description:
       'Solution complète de supervision en temps réel et de gestion automatisée des places de parking via objets IoT, application mobile et dashboard web.',
@@ -113,7 +117,7 @@ const experiences = [
   },
   {
     title: 'Stage de perfectionnement - Poubelle intelligente',
-    badge: 'Perfectionnement IoT',
+    badge: 'Perfectionnement ',
     company: 'Designet Web Agency',
     period: '2024 - 2025',
     project: 'Poubelle Intelligente Connectée & Tri Automatisé',
@@ -128,7 +132,7 @@ const experiences = [
     tech: ['ESP32', 'C++', 'Capteurs Ultrason', 'Servo', 'React.js', 'Express', 'MongoDB'],
   },
   {
-    title: 'Stage PFE Supadata',
+    title: 'Stage PFE licence',
     badge: 'Licence ISI',
     company: 'Designet Web Agency',
     period: '2024',
@@ -256,7 +260,9 @@ function App() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [projectFilter, setProjectFilter] = useState('Tous')
   const [formSubmitted, setFormSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [submittedName, setSubmittedName] = useState('')
   const [formData, setFormData] = useState({
     name: '',
@@ -264,6 +270,65 @@ function App() {
     subject: '',
     message: '',
   })
+
+  const [codeTab, setCodeTab] = useState('profile')
+  const [copied, setCopied] = useState(false)
+
+  const rawSnippets = {
+    profile: `const profile = {
+  name: "Eya Nemer",
+  role: "Développeuse Full Stack & IoT",
+  location: "Tunis, Tunisie",
+  status: "🟢 Recherche active d'opportunités",
+  diplomes: [
+    "Master Pro Développement Services IoT (ISET Mahdia)",
+    "Licence Ingénierie Systèmes Informatiques (ISSAT Kairouan)"
+  ],
+  stack: {
+    web: ["React.js", "Node.js", "Laravel", "Express"],
+    iot: ["ESP32", "MQTT", "RFID", "C++", "Capteurs"],
+    ai: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"]
+  },
+  experiences: [
+    "PFE Master: Smart Parking IoT & Dashboard MERN",
+    "PFE Licence: SUPADATA SaaS Cartes Visite Laravel",
+    "Stage IoT: Poubelle Intelligente Tri Sélectif",
+    "Stage Web: Site E-Commerce Dynamique"
+  ]
+};`,
+    recruiter: `{
+  "candidate": "Eya Nemer",
+  "target_roles": ["Développeuse Full Stack", "Ingénieure IoT & Embarqué"],
+  "availability": "🟢 Ouverte aux opportunités",
+  "languages": ["Français (Courant)", "Anglais (Technique)"],
+  "key_assets": [
+    "Maîtrise complète Hardware à Cloud & Frontend",
+    "Développement de Dashboards MERN Temps Réel",
+    "Rigueur, autonomie et passion des nouvelles tech"
+  ],
+  "contact": {
+    "email": "eyanemer2@gmail.com",
+    "phone": "+216 55 641 245",
+    "linkedin": "eya-nemer-026275226"
+  }
+}`,
+    stack: `export interface EngineerProfile {
+  name: "Eya Nemer";
+  specialization: "Full Stack & IoT";
+  frontend: ["React.js", "Vite", "Flutter", "Bootstrap"];
+  backend: ["Node.js", "Express", "Laravel", "REST API"];
+  embedded: ["ESP32", "MQTT", "RFID", "Capteurs", "C++"];
+  databases: ["MongoDB", "MySQL", "SQL Server"];
+  ai_cloud: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"];
+}`
+  }
+
+  const handleCopyCode = () => {
+    const textToCopy = rawSnippets[codeTab] || rawSnippets.profile
+    navigator.clipboard.writeText(textToCopy)
+    setCopied(true)
+    setTimeout(() => setCopied(false), 2000)
+  }
 
   useEffect(() => {
     const currentRole = roles[roleIndex]
@@ -302,10 +367,10 @@ function App() {
       { rootMargin: '-40% 0px -40% 0px' },
     )
 
-    ;['hero', ...navItems.map((item) => item.id)].forEach((id) => {
-      const section = document.getElementById(id)
-      if (section) observer.observe(section)
-    })
+      ;['hero', ...navItems.map((item) => item.id)].forEach((id) => {
+        const section = document.getElementById(id)
+        if (section) observer.observe(section)
+      })
 
     const onScroll = () => {
       setShowBackToTop(window.scrollY > 600)
@@ -330,34 +395,54 @@ function App() {
     setFormData((current) => ({ ...current, [name]: value }))
   }
 
-  const submitContactForm = (event) => {
+  const submitContactForm = async (event) => {
     event.preventDefault()
+    setIsSubmitting(true)
 
     const name = formData.name
     const email = formData.email
     const subject = formData.subject || 'Opportunité professionnelle - Eya Nemer'
     const message = formData.message
 
-    // Async submit attempt to Formspree
     try {
-      fetch('https://formspree.io/f/eyanemer2@gmail.com', {
+      const response = await fetch('https://formsubmit.co/ajax/eyanemer2@gmail.com', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
-      }).catch(() => {})
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          _subject: subject,
+          message,
+          _captcha: 'false',
+        }),
+      })
+
+      if (response.ok) {
+        setSubmittedName(name)
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      } else {
+        // Direct fallback mailto
+        window.location.href = `mailto:eyanemer2@gmail.com?subject=${encodeURIComponent(
+          subject,
+        )}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`
+        setSubmittedName(name)
+        setFormSubmitted(true)
+        setFormData({ name: '', email: '', subject: '', message: '' })
+      }
     } catch {
-      // ignore fallback
+      window.location.href = `mailto:eyanemer2@gmail.com?subject=${encodeURIComponent(
+        subject,
+      )}&body=${encodeURIComponent(`Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`
+      setSubmittedName(name)
+      setFormSubmitted(true)
+      setFormData({ name: '', email: '', subject: '', message: '' })
+    } finally {
+      setIsSubmitting(false)
     }
-
-    // Trigger mailto link for direct mail client
-    const body = `Nom: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
-    window.location.href = `mailto:eyanemer2@gmail.com?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`
-
-    setSubmittedName(name)
-    setFormSubmitted(true)
-    setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
   const filteredProjects =
@@ -371,7 +456,7 @@ function App() {
         <div className="nav-container">
           <a className="nav-logo" href="#hero" onClick={() => scrollToSection('hero')}>
             <span className="logo-brackets">&lt;/&gt;</span>
-            <span className="logo-name">Eya Nemer</span>
+            <span className="logo-name">Nemer Eya</span>
             <span className="logo-subbadge">Full Stack & IoT</span>
           </a>
 
@@ -415,25 +500,34 @@ function App() {
           <div className="hero-content">
             <div className="hero-badge reveal">
               <span className="badge-dot" />
-              Disponible pour opportunités Full Stack, IoT & IA
+              <span>À la recherche d'opportunités</span>
             </div>
 
             <h1 className="hero-name reveal">
-              <span>Nemer</span>
-              <span className="hero-firstname">Eya</span>
+              <span className="hero-firstname">Nemer</span>
+              <span>Eya</span>
             </h1>
 
             <div className="hero-title reveal">
-              <span className="typing-prefix">Je suis </span>
+              <span className="typing-prefix">&gt; </span>
               <span className="typing-text">{typedText}</span>
               <span className="typing-cursor">|</span>
             </div>
 
             <p className="hero-desc reveal">
-              Développeuse Full Stack passionnée avec une double compétence web et IoT.
-              Je conçois des applications complètes, des dashboards temps réel et des systèmes
-              connectés intelligents, du capteur embarqué jusqu’à l’interface utilisateur.
+              Développeuse Full Stack & IoT, spécialisée dans le développement d'applications web, systèmes embarqués connectés et intégrations IA.
             </p>
+
+            <div className="hero-recruiter-highlights reveal">
+              <div className="highlight-pill">
+                <GraduationCap size={16} />
+                <span>Master developpement des Services IoT & Licence ISI</span>
+              </div>
+              <div className="highlight-pill">
+                <Cpu size={16} />
+                <span>Double Spécialité Web + IoT</span>
+              </div>
+            </div>
 
             <div className="hero-actions reveal">
               <button className="btn btn-primary" onClick={() => scrollToSection('projects')} type="button">
@@ -468,32 +562,144 @@ function App() {
             </div>
           </div>
 
-          <div className="developer-card reveal" aria-label="Aperçu développeur">
+          <div className="developer-card reveal" aria-label="Aperçu développeur pour recruteurs">
             <div className="code-window">
-              <div className="window-dots">
-                <span />
-                <span />
-                <span />
+              <div className="window-header">
+                <div className="window-dots">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <div className="code-tabs">
+                  <button
+                    className={`code-tab ${codeTab === 'profile' ? 'active' : ''}`}
+                    onClick={() => setCodeTab('profile')}
+                    type="button"
+                  >
+                    <FileCode size={14} />
+                    profile.js
+                  </button>
+                  <button
+                    className={`code-tab ${codeTab === 'recruiter' ? 'active' : ''}`}
+                    onClick={() => setCodeTab('recruiter')}
+                    type="button"
+                  >
+                    <Briefcase size={14} />
+                    recruiter_view.json
+                  </button>
+                  <button
+                    className={`code-tab ${codeTab === 'stack' ? 'active' : ''}`}
+                    onClick={() => setCodeTab('stack')}
+                    type="button"
+                  >
+                    <Cpu size={14} />
+                    stack_matrix.ts
+                  </button>
+                </div>
+                <button
+                  aria-label="Copier le code"
+                  className="copy-btn"
+                  onClick={handleCopyCode}
+                  title="Copier dans le presse-papier"
+                  type="button"
+                >
+                  {copied ? (
+                    <>
+                      <Check size={14} className="copied-icon" />
+                      <span>Copié !</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy size={14} />
+                      <span>Copier</span>
+                    </>
+                  )}
+                </button>
               </div>
-              <pre>
-                <code>{`const profile = {
-  name: "Eya Nemer",
-  role: "Développeuse Full Stack & IoT",
-  location: "Tunis, Tunisie",
-  stack: ["React", "Node", "Laravel", "ESP32"],
-  experiences: [
-    "Stage PFE Master",
-    "Stage PFE Supadata",
-    "Stage Perfectionnement E-commerce"
-  ],
-  status: "À la recherche d'opportunités"
-}`}</code>
-              </pre>
+
+              <div className="code-editor-body">
+                <div className="line-numbers">
+                  {Array.from({ length: 22 }, (_, i) => (
+                    <span key={i + 1}>{i + 1}</span>
+                  ))}
+                </div>
+
+                <div className="code-content-wrapper">
+                  {codeTab === 'profile' && (
+                    <pre>
+                      <code>
+                        <span className="code-kw">const</span> <span className="code-var">profile</span> = &#123;<br />
+                        &nbsp;&nbsp;<span className="code-key">name</span>: <span className="code-str">"Eya Nemer"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">role</span>: <span className="code-str">"Développeuse Full Stack & IoT"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">location</span>: <span className="code-str">"Tunis, Tunisie"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">status</span>: <span className="code-str">"🟢 Ouverte aux opportunités"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">diplomas</span>: [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Master Pro Services IoT (ISET Mahdia)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Licence Ingénierie Systèmes Informatiques"</span><br />
+                        &nbsp;&nbsp;],<br />
+                        &nbsp;&nbsp;<span className="code-key">stack</span>: &#123;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">web</span>: [<span className="code-str">"React"</span>, <span className="code-str">"Node"</span>, <span className="code-str">"Laravel"</span>, <span className="code-str">"Express"</span>],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">iot</span>: [<span className="code-str">"ESP32"</span>, <span className="code-str">"MQTT"</span>, <span className="code-str">"RFID"</span>, <span className="code-str">"C++"</span>],<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">ai</span>: [<span className="code-str">"RAG"</span>, <span className="code-str">"TensorFlow"</span>, <span className="code-str">"Streamlit"</span>]<br />
+                        &nbsp;&nbsp;&#125;,<br />
+                        &nbsp;&nbsp;<span className="code-key">experiences</span>: [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Master: Smart Parking IoT (MERN)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Licence: SUPADATA SaaS (Laravel)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage IoT: Tri Sélectif Intelligente"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage Web: E-Commerce Dynamique"</span><br />
+                        &nbsp;&nbsp;]<br />
+                        &#125;;
+                      </code>
+                    </pre>
+                  )}
+
+                  {codeTab === 'recruiter' && (
+                    <pre>
+                      <code>
+                        &#123;<br />
+                        &nbsp;&nbsp;<span className="code-key">"candidate"</span>: <span className="code-str">"Eya Nemer"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">"target_roles"</span>: [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Développeuse Full Stack Web / Mobile"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Ingénieure / Spécialiste IoT & Embedded"</span><br />
+                        &nbsp;&nbsp;],<br />
+                        &nbsp;&nbsp;<span className="code-key">"availability"</span>: <span className="code-str">"🟢 Ouverte aux opportunités"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">"key_assets"</span>: [<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Architecture Web complète & Dashboards MERN"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Systèmes embarqués IoT (ESP32, MQTT, Sensors)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Rigueur, esprit d'équipe et esprit solution"</span><br />
+                        &nbsp;&nbsp;],<br />
+                        &nbsp;&nbsp;<span className="code-key">"open_for_interview"</span>: <span className="code-bool">true</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">"contact"</span>: &#123;<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">"email"</span>: <span className="code-str">"eyanemer2@gmail.com"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">"phone"</span>: <span className="code-str">"+216 55 641 245"</span><br />
+                        &nbsp;&nbsp;&#125;<br />
+                        &#125;
+                      </code>
+                    </pre>
+                  )}
+
+                  {codeTab === 'stack' && (
+                    <pre>
+                      <code>
+                        <span className="code-kw">export interface</span> <span className="code-type">EngineerProfile</span> &#123;<br />
+                        &nbsp;&nbsp;<span className="code-key">name</span>: <span className="code-str">"Eya Nemer"</span>;<br />
+                        &nbsp;&nbsp;<span className="code-key">specialization</span>: <span className="code-str">"Full Stack & IoT"</span>;<br />
+                        &nbsp;&nbsp;<span className="code-key">frontend</span>: [<span className="code-str">"React.js"</span>, <span className="code-str">"Vite"</span>, <span className="code-str">"Flutter"</span>];<br />
+                        &nbsp;&nbsp;<span className="code-key">backend</span>: [<span className="code-str">"Node.js"</span>, <span className="code-str">"Express"</span>, <span className="code-str">"Laravel"</span>];<br />
+                        &nbsp;&nbsp;<span className="code-key">hardware</span>: [<span className="code-str">"ESP32"</span>, <span className="code-str">"MQTT"</span>, <span className="code-str">"RFID"</span>, <span className="code-str">"C++"</span>];<br />
+                        &nbsp;&nbsp;<span className="code-key">databases</span>: [<span className="code-str">"MongoDB"</span>, <span className="code-str">"MySQL"</span>];<br />
+                        &nbsp;&nbsp;<span className="code-key">ai_cloud</span>: [<span className="code-str">"RAG"</span>, <span className="code-str">"TensorFlow"</span>, <span className="code-str">"Streamlit"</span>];<br />
+                        &#125;<br />
+                      </code>
+                    </pre>
+                  )}
+                </div>
+              </div>
             </div>
             <div className="terminal-card">
               <Terminal size={18} />
-              <span>npm run dev</span>
-              <strong>Prête pour le recrutement</strong>
+              <span>status: active</span>
+              <strong>Prête pour entretien & recrutement</strong>
             </div>
           </div>
 
@@ -532,8 +738,7 @@ function App() {
               <div className="about-text reveal">
                 <p>
                   Je suis <strong>Eya Nemer</strong>, développeuse <strong>Full Stack</strong> titulaire
-                  d’une Licence en Systèmes Informatiques (ISSAT Kairouan) et actuellement en Master
-                  professionnel en Développement des Services IoT (ISET Mahdia).
+                  d’une Licence en Systèmes Informatiques (ISSAT Kairouan) et d'un Master professionnel en Développement des Services IoT (ISET Mahdia).
                 </p>
                 <p>
                   Mon expertise s’étend de la conception d’applications web dynamiques (<strong>React, Node.js, Express, Laravel, PHP</strong>)
@@ -552,15 +757,7 @@ function App() {
                   </div>
                   <div className="info-item">
                     <GraduationCap size={18} />
-                    <span>Master Pro Services IoT</span>
-                  </div>
-                  <div className="info-item">
-                    <Terminal size={18} />
-                    <span>Full Stack · IoT · IA appliquée</span>
-                  </div>
-                  <div className="info-item">
-                    <Mail size={18} />
-                    <span>Français · Anglais technique</span>
+                    <span>Master Pro developpement des Services IoT</span>
                   </div>
                 </div>
 
@@ -873,9 +1070,27 @@ function App() {
                       value={formData.message}
                     />
                   </div>
-                  <button className={`btn form-submit ${formSubmitted ? 'btn-success' : 'btn-primary'}`} type="submit">
-                    {formSubmitted ? <CheckCircle2 size={18} /> : <Send size={18} />}
-                    {formSubmitted ? 'Message Envoyé !' : 'Envoyer le message'}
+                  <button
+                    className={`btn form-submit ${formSubmitted ? 'btn-success' : 'btn-primary'}`}
+                    disabled={isSubmitting}
+                    type="submit"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="spinning" size={18} />
+                        Envoi en cours...
+                      </>
+                    ) : formSubmitted ? (
+                      <>
+                        <CheckCircle2 size={18} />
+                        Message Envoyé !
+                      </>
+                    ) : (
+                      <>
+                        <Send size={18} />
+                        Envoyer le message
+                      </>
+                    )}
                   </button>
                 </form>
               </div>
@@ -888,10 +1103,10 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <a className="footer-logo" href="#hero" onClick={() => scrollToSection('hero')}>
-              Eya Nemer
+              Nemer Eya
             </a>
             <p className="footer-copy">
-              Portfolio développé par <strong>Eya Nemer</strong> · Développeuse Full Stack & IoT
+              Développé par <strong>Nemer Eya</strong> @2026
             </p>
             <div className="footer-socials">
               <a
