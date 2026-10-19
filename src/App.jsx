@@ -878,7 +878,7 @@ function App() {
             {/* Filter buttons */}
             <div className="projects-filter reveal">
               <Filter size={16} />
-              {['Tous', 'IoT & Embarqué', 'IA & Cloud', 'Web Full Stack'].map((cat) => (
+              {['Tous', 'IA & Cloud', 'Web Full Stack'].map((cat) => (
                 <button
                   className={`filter-btn ${projectFilter === cat ? 'active' : ''}`}
                   key={cat}
