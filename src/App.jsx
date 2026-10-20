@@ -142,7 +142,7 @@ const experiences = [
     tasks: [
       'Analyse des besoins métiers, modélisation de la base de données relationnelle et architecture du projet web',
       'Développement du backend et des API en Laravel / PHP avec gestion sécurisée des profils utilisateurs',
-      'Conception d’interfaces web responsive et ergono-intuitives avec intégration de QR codes et liens NFC',
+      'Conception d’interfaces web responsive et ergonomiques et intuitives  avec intégration de QR codes et liens NFC',
       'Tests de performance et déploiement de fonctionnalités d’administration des utilisateurs et abonnements',
     ],
     tech: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'HTML5/CSS3', 'Bootstrap'],
@@ -515,17 +515,20 @@ function App() {
             </div>
 
             <p className="hero-desc reveal">
-              Développeuse Full Stack & IoT, spécialisée dans le développement d'applications web, systèmes embarqués connectés et intégrations IA.
+              Diplômée d’un Master professionnel en Développement des Services IoT,
+              je conçois et développe des applications web et mobiles ainsi que des
+              systèmes connectés, en combinant développement Full Stack, IoT et
+              intégration de solutions d’intelligence artificielle
             </p>
 
             <div className="hero-recruiter-highlights reveal">
               <div className="highlight-pill">
                 <GraduationCap size={16} />
-                <span>Master developpement des Services IoT & Licence ISI</span>
+                <span>Master professionnel en Développement des Services IoT & Licence Ingénierie des Systèmes Informatiques</span>
               </div>
               <div className="highlight-pill">
                 <Cpu size={16} />
-                <span>Double Spécialité Web + IoT</span>
+                <span>Double spécialisation : Full Stack & IoT</span>
               </div>
             </div>
 
@@ -645,7 +648,7 @@ function App() {
                         &nbsp;&nbsp;<span className="code-key">experiences</span>: [<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Master: Smart Parking IoT (MERN)"</span>,<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Licence: SUPADATA SaaS (Laravel)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage IoT: Tri Sélectif Intelligente"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage IoT: Tri Sélectif Intelligent"</span>,<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage Web: E-Commerce Dynamique"</span><br />
                         &nbsp;&nbsp;]<br />
                         &#125;;
@@ -811,7 +814,8 @@ function App() {
               <span className="section-tag">03 // Expériences</span>
               <h2 className="section-title">Parcours Professionnel & Stages</h2>
               <p className="section-sub">
-                Une expérience pratique consolidée par trois stages majeurs couvrant le PFE Master IoT, le PFE Licence Supadata et le développement e-commerce.
+                Quatre expériences de stage autour du développement Full Stack,
+                des systèmes IoT connectés et de la conception d’applications web
               </p>
             </div>
 
@@ -1106,7 +1110,7 @@ function App() {
               Nemer Eya
             </a>
             <p className="footer-copy">
-              Développé par <strong>Nemer Eya</strong> @2026
+              Portfolio conçu et développé par <strong>EYA NEMER</strong> @2026
             </p>
             <div className="footer-socials">
               <a
