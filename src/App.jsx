@@ -49,7 +49,7 @@ const navItems = [
 
 const roles = [
   'Développeuse Full Stack',
-  'Développeuse IoT & Embarqué',
+  'Ingénieure IoT',
 
 ]
 
