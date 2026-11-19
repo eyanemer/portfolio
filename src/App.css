@@ -2066,7 +2066,7 @@ body {
   }
 
   .hero {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     align-content: start;
     min-height: auto;
     padding: 112px 16px 56px;
@@ -2074,6 +2074,7 @@ body {
 
   .hero-content {
     width: min(680px, 100%);
+    min-width: 0;
     margin: 0 auto;
     padding: 24px 0 32px;
   }
@@ -2088,6 +2089,7 @@ body {
     bottom: auto;
     z-index: 2;
     width: min(680px, 100%);
+    min-width: 0;
     margin: 0 auto;
   }
 
@@ -2135,8 +2137,7 @@ body {
 
   .hero-content {
     width: 100%;
-    padding-top: 104px;
-    padding-bottom: 40px;
+    padding: 24px 0 32px;
   }
 
   .hero-badge {
@@ -2217,6 +2218,10 @@ body {
 
   .developer-card {
     width: 100%;
+  }
+
+  .code-window {
+    min-width: 0;
   }
 
   .code-editor-body {
