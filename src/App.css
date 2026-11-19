@@ -194,6 +194,7 @@ body {
   position: relative;
   display: grid;
   min-height: 100vh;
+  min-height: 100svh;
   overflow: hidden;
   color: var(--text);
   background:
@@ -2064,17 +2065,30 @@ body {
     display: grid;
   }
 
+  .hero {
+    grid-template-columns: 1fr;
+    align-content: start;
+    min-height: auto;
+    padding: 112px 16px 56px;
+  }
+
+  .hero-content {
+    width: min(680px, 100%);
+    margin: 0 auto;
+    padding: 24px 0 32px;
+  }
+
+  .hero-scroll-hint {
+    display: none;
+  }
+
   .developer-card {
     position: relative;
     right: auto;
     bottom: auto;
     z-index: 2;
-    width: min(680px, calc(100% - 32px));
-    margin: 0 auto 56px;
-  }
-
-  .hero-content {
-    padding-bottom: 48px;
+    width: min(680px, 100%);
+    margin: 0 auto;
   }
 
   .about-grid,
@@ -2089,27 +2103,12 @@ body {
 }
 
 @media (min-width: 861px) and (max-width: 1080px) {
-  .hero {
-    grid-template-columns: minmax(0, 1fr) minmax(360px, 44vw);
-    align-items: center;
-    gap: 24px;
-    padding: 112px 24px 72px;
+  .hero-name {
+    font-size: clamp(4.5rem, 10vw, 7rem);
   }
 
-  .hero .hero-content {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 24px 0;
-  }
-
-  .hero .developer-card {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    width: 100%;
-    max-width: 480px;
-    margin: 0;
+  .hero-desc {
+    max-width: 680px;
   }
 }
 
@@ -2135,7 +2134,7 @@ body {
   }
 
   .hero-content {
-    width: calc(100% - 24px);
+    width: 100%;
     padding-top: 104px;
     padding-bottom: 40px;
   }
@@ -2202,8 +2201,22 @@ body {
   }
 
   .developer-card {
-    width: calc(100% - 24px);
-    margin: 0 auto 48px;
+    width: 100%;
+  }
+
+  .code-editor-body {
+    max-height: 280px;
+    padding: 12px;
+    font-size: 0.75rem;
+  }
+
+  .line-numbers {
+    padding-right: 9px;
+    font-size: 0.72rem;
+  }
+
+  .code-content-wrapper {
+    padding-left: 9px;
   }
 
   .hero-scroll-hint {
@@ -2278,6 +2291,49 @@ body {
 
   .hero-name {
     font-size: clamp(2.45rem, 14vw, 3.4rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding-right: 12px;
+    padding-left: 12px;
+  }
+
+  .hero-badge {
+    align-items: flex-start;
+    max-width: 100%;
+    height: auto;
+    line-height: 1.35;
+  }
+
+  .badge-dot {
+    flex: 0 0 9px;
+    margin-top: 3px;
+  }
+
+  .window-header {
+    padding: 8px 10px;
+  }
+
+  .code-tab {
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  .copy-btn {
+    width: 32px;
+    height: 32px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .copy-btn span {
+    display: none;
+  }
+
+  .code-editor-body {
+    max-height: 240px;
   }
 }
 
