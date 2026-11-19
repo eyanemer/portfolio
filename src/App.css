@@ -2140,10 +2140,17 @@ body {
   }
 
   .hero-badge {
+    width: fit-content;
+    max-width: 100%;
     min-height: 34px;
     margin-bottom: 20px;
     padding: 0 11px;
     font-size: 0.78rem;
+  }
+
+  .hero-badge span:last-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .hero-name {
@@ -2168,16 +2175,24 @@ body {
   }
 
   .hero-recruiter-highlights {
+    width: 100%;
     gap: 8px;
     margin: 16px 0 22px;
   }
 
   .highlight-pill {
+    width: 100%;
     max-width: 100%;
+    align-items: flex-start;
     padding: 7px 10px;
     font-size: 0.78rem;
     line-height: 1.4;
     white-space: normal;
+  }
+
+  .highlight-pill span {
+    min-width: 0;
+    overflow-wrap: anywhere;
   }
 
   .highlight-pill svg {
@@ -2307,6 +2322,21 @@ body {
     line-height: 1.35;
   }
 
+  .hero-name {
+    max-width: 100%;
+  }
+
+  .hero-title {
+    width: 100%;
+  }
+
+  .hero-desc,
+  .hero-recruiter-highlights,
+  .hero-actions,
+  .hero-socials {
+    width: 100%;
+  }
+
   .badge-dot {
     flex: 0 0 9px;
     margin-top: 3px;
@@ -2314,6 +2344,14 @@ body {
 
   .window-header {
     padding: 8px 10px;
+  }
+
+  .window-dots {
+    display: none;
+  }
+
+  .code-tabs {
+    min-width: 0;
   }
 
   .code-tab {
