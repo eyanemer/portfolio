@@ -215,11 +215,11 @@ const projects = [
     tech: ['TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'IoT ESP32'],
     images: [
       {
-        src: `${baseUrl}smartplantia.jfif`,
+        src: `${baseUrl}smartplantia.jpeg`,
         caption: 'SmartPlant IA — paramètres environnementaux en temps réel',
       },
       {
-        src: `${baseUrl}smartplantia2.jfif`,
+        src: `${baseUrl}smartplantia2.jpeg`,
         caption: 'SmartPlant IA — configuration de l’irrigation et historique',
       },
     ],
