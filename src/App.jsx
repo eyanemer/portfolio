@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import {
   ArrowRight,
+  ArrowUpRight,
   Award,
   BrainCircuit,
   Briefcase,
   BriefcaseBusiness,
   Check,
   CheckCircle2,
+  ChevronLeft,
+  ChevronRight,
   ChevronUp,
   CircuitBoard,
   Code2,
@@ -14,14 +17,15 @@ import {
   Cpu,
   Database,
   Download,
+  Eye,
   FileCode,
-  Filter,
   GraduationCap,
   Layers3,
   Linkedin,
   Loader2,
   Mail,
   MapPin,
+  Maximize2,
   Menu,
   MonitorCog,
   Phone,
@@ -30,10 +34,9 @@ import {
   Server,
   ShieldCheck,
   Sparkles,
-  Terminal,
-  UtensilsCrossed,
   Wrench,
   X,
+  ZoomIn,
 } from 'lucide-react'
 import './App.css'
 
@@ -67,13 +70,13 @@ const skillGroups = [
     skills: ['JavaScript', 'Python', 'PHP', 'C++', 'C#', 'Java', 'SQL', 'HTML5', 'CSS3'],
   },
   {
-    title: 'Frontend & Mobile',
+    title: 'Front-end et mobile',
     icon: Layers3,
     tone: 'blue',
-    skills: ['React.js', 'Flutter', 'Vite', 'Bootstrap', 'CSS Responsive', 'Dashboards interactifs'],
+    skills: ['React.js', 'Flutter', 'Vite', 'Bootstrap', 'CSS adaptatif', 'Tableaux de bord interactifs'],
   },
   {
-    title: 'Backend',
+    title: 'Back-end',
     icon: Server,
     tone: 'green',
     skills: ['Node.js', 'Express.js', 'Laravel', 'REST API', 'WebSocket', '.NET'],
@@ -85,13 +88,13 @@ const skillGroups = [
     skills: ['ESP32', 'Arduino', 'Raspberry Pi', 'MQTT', 'RFID', 'Capteurs', 'Node-RED'],
   },
   {
-    title: 'Données, IA & Cloud',
+    title: 'Données, IA et cloud',
     icon: BrainCircuit,
     tone: 'purple',
     skills: ['MongoDB', 'MySQL', 'SQL Server', 'TensorFlow', 'RAG', 'Streamlit', 'Azure IoT'],
   },
   {
-    title: 'Outils & Méthodes',
+    title: 'Outils et méthodes',
     icon: Wrench,
     tone: 'red',
     skills: ['Git', 'Docker', 'UML', 'Scrum', 'VMware', 'Postman', 'Documentation'],
@@ -100,107 +103,177 @@ const skillGroups = [
 
 const experiences = [
   {
-    title: 'Stage de PFE ',
-    badge: 'Master ',
+    title: 'Stage de fin d’études (PFE)',
+    badge: 'Master',
     company: 'be coders',
     period: '2026',
-    project: 'Système de Parking Intelligent Connecté',
+    project: 'Système de parking intelligent connecté (CityParking)',
     description:
-      'Solution complète de supervision en temps réel et de gestion automatisée des places de parking via objets IoT, application mobile et dashboard web.',
+      'Solution de supervision en temps réel et de gestion automatisée des places de parking à l’aide d’objets IoT, d’une application mobile et d’un tableau de bord web.',
     tasks: [
-      'Conception et mise en œuvre d’une architecture IoT complète articulée autour de microcontrôleurs ESP32, modules RFID et du protocole MQTT',
-      'Développement d’une application mobile Flutter pour la consultation, la réservation des places et le guidage des utilisateurs',
-      'Création d’un dashboard Web MERN (MongoDB, Express, React, Node.js) pour l’administration des abonnements, utilisateurs et l’affichage de statistiques temps réel',
-      'Mise en place de la communication temps réel bidirectionnelle entre le système embarqué et le serveur web',
+      'Conception d’une architecture IoT reposant sur des microcontrôleurs ESP32, des modules RFID et le protocole MQTT',
+      'Développement d’une application Flutter pour consulter et réserver les places, avec guidage des utilisateurs',
+      'Création d’un tableau de bord web avec la stack MERN pour gérer les abonnements, les utilisateurs et les statistiques en temps réel',
+      'Mise en place d’une communication bidirectionnelle en temps réel entre le système embarqué et le serveur web',
     ],
     tech: ['ESP32', 'RFID', 'MQTT', 'Flutter', 'React.js', 'Node.js', 'Express', 'MongoDB'],
+    images: [
+      {
+        src: `${baseUrl}parking1.png`,
+        caption: 'CityParking — écran de connexion de l’application Flutter',
+      },
+      {
+        src: `${baseUrl}parking2.png`,
+        caption: 'CityParking — carte des places et réservations',
+      },
+      {
+        src: `${baseUrl}parking.png`,
+        caption: 'CityParking — aperçu du projet de fin d’études',
+      },
+    ],
   },
   {
-    title: 'Stage de perfectionnement - Poubelle intelligente',
-    badge: 'Perfectionnement ',
+    title: 'Stage de perfectionnement — poubelle intelligente',
+    badge: 'Perfectionnement',
     company: 'Designet Web Agency',
     period: '2024 - 2025',
-    project: 'Poubelle Intelligente Connectée & Tri Automatisé',
+    project: 'Poubelle intelligente connectée et tri automatisé',
     description:
-      'Conception et développement d’un prototype intelligent de tri sélectif de déchets avec détection de présence, classification automatique et dashboard de supervision.',
+      'Conception et développement d’un prototype de tri sélectif avec détection de présence, classification automatique et tableau de bord de supervision.',
     tasks: [
-      'Détection de présence et analyse par capteurs ultrasons et d’humidité pour l’identification automatisée des déchets (humides / secs)',
-      'Pilotage d’un système mécanique de tri articulé par servomoteur et programmé en C++ sur microcontrôleur ESP32',
-      'Développement d’un dashboard web temps réel pour visualiser les niveaux de remplissage et les alertes de maintenance',
-      'Interfaçage du prototype embarqué avec le serveur web via API REST et communications séries',
+      'Détection de présence et analyse par capteurs à ultrasons et d’humidité pour distinguer les déchets humides et secs',
+      'Pilotage du mécanisme de tri par servomoteur, programmé en C++ sur un microcontrôleur ESP32',
+      'Développement d’un tableau de bord web pour visualiser le niveau de remplissage et les alertes de maintenance',
+      'Connexion du prototype au serveur web à l’aide d’une API REST et d’une liaison série',
     ],
-    tech: ['ESP32', 'C++', 'Capteurs Ultrason', 'Servo', 'React.js', 'Express', 'MongoDB'],
+    tech: ['ESP32', 'C++', 'Capteurs à ultrasons', 'Servomoteur', 'React.js', 'Express', 'MongoDB'],
+    images: [
+      {
+        src: `${baseUrl}poubelle1.png`,
+        caption: 'SmartBin — accueil et présentation du projet IoT',
+      },
+      {
+        src: `${baseUrl}poubelle2.png`,
+        caption: 'SmartBin — suivi du remplissage et du tri en temps réel',
+      },
+    ],
   },
   {
-    title: 'Stage PFE licence',
+    title: 'Stage de fin d’études (licence)',
     badge: 'Licence ISI',
     company: 'Designet Web Agency',
     period: '2024',
-    project: 'Plateforme Web SUPADATA - Cartes de Visite Numériques',
+    project: 'Plateforme web SUPADATA — cartes de visite numériques',
     description:
-      'Développement d’une plateforme SaaS permettant la création, la personnalisation dynamique et le partage rapide de cartes de visite digitales.',
+      'Développement d’une plateforme SaaS de création, de personnalisation et de partage de cartes de visite numériques.',
     tasks: [
-      'Analyse des besoins métiers, modélisation de la base de données relationnelle et architecture du projet web',
-      'Développement du backend et des API en Laravel / PHP avec gestion sécurisée des profils utilisateurs',
-      'Conception d’interfaces web responsive et ergonomiques et intuitives  avec intégration de QR codes et liens NFC',
-      'Tests de performance et déploiement de fonctionnalités d’administration des utilisateurs et abonnements',
+      'Analyse des besoins, modélisation de la base de données relationnelle et conception de l’architecture web',
+      'Développement du back-end et des API avec Laravel et PHP, avec gestion sécurisée des profils',
+      'Conception d’interfaces web adaptatives et intuitives intégrant des QR codes et des liens NFC',
+      'Tests de performance et mise en place des fonctions d’administration des utilisateurs et des abonnements',
     ],
     tech: ['Laravel', 'PHP', 'MySQL', 'JavaScript', 'HTML5/CSS3', 'Bootstrap'],
+    images: [
+      {
+        src: `${baseUrl}supadata1.png`,
+        caption: 'SUPADATA — accueil et cartes de visite numériques',
+      },
+      {
+        src: `${baseUrl}supadata2.png`,
+        caption: 'SUPADATA — connexion et gestion des comptes utilisateurs',
+      },
+    ],
   },
   {
-    title: 'Stage de perfectionnement site e-commerce',
-    badge: 'Perfectionnement Web',
+    title: 'Stage de perfectionnement — site e-commerce',
+    badge: 'Perfectionnement web',
     company: 'Designet Web Agency',
     period: '2024',
-    project: 'Plateforme E-Commerce Dynamique & Responsive',
+    project: 'Site e-commerce dynamique et adaptatif',
     description:
-      'Conception et optimisation d’un site e-commerce complet doté d’un catalogue dynamique, panier d’achat et panneau d’administration.',
+      'Conception et optimisation d’un site e-commerce avec catalogue dynamique, panier d’achat et panneau d’administration.',
     tasks: [
-      'Développement des fonctionnalités web majeures: catalogue interactif, filtrage par catégorie, panier et gestion des commandes',
-      'Intégration d’un design responsive soigné pour garantir une navigation fluide sur mobile, tablette et desktop',
-      'Optimisation du temps de chargement, du SEO technique et de la gestion de la base de données MySQL',
-      'Mise en place de modules back-office pour la gestion des stocks et la visualisation des ventes',
+      'Développement du catalogue, du filtrage par catégorie, du panier et de la gestion des commandes',
+      'Adaptation de l’interface aux mobiles, aux tablettes et aux ordinateurs',
+      'Optimisation du temps de chargement, du référencement technique et de la base de données MySQL',
+      'Mise en place d’un espace d’administration pour gérer les stocks et suivre les ventes',
     ],
-    tech: ['PHP', 'Laravel / JS', 'MySQL', 'CSS Responsive', 'REST API', 'UI/UX Design'],
+    tech: ['PHP', 'Laravel / JavaScript', 'MySQL', 'CSS adaptatif', 'API REST', 'UI/UX'],
   },
 ]
 
 const projects = [
   {
-    title: 'IntelliFarm',
+    title: 'SmartPlant IA',
+    subtitle: 'IRRIGATION CONNECTÉE & DÉTECTION FOLIAIRE TENSORFLOW',
     category: 'IA & Cloud',
+    categoryBadge: 'PROJET IA & IoT',
+    icon: BrainCircuit,
+    architecture: 'IoT ESP32 + Vision par Ordinateur TensorFlow',
+    description:
+      'Système d’irrigation intelligent combinant capteurs d’humidité du sol, microcontrôleur ESP32 et modèle TensorFlow pour l’arrosage automatisé et la détection précoce des maladies foliaires.',
+    tech: ['TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'IoT ESP32'],
+    images: [
+      {
+        src: `${baseUrl}smartplantia.jfif`,
+        caption: 'SmartPlant IA — paramètres environnementaux en temps réel',
+      },
+      {
+        src: `${baseUrl}smartplantia2.jfif`,
+        caption: 'SmartPlant IA — configuration de l’irrigation et historique',
+      },
+    ],
+  },
+  {
+    title: 'Mini système MES',
+    subtitle: 'TABLEAU DE BORD DE SUIVI DE FABRICATION EN TEMPS RÉEL',
+    category: 'Web Full Stack',
+    categoryBadge: 'APPLICATION INDUSTRIELLE WEB',
+    icon: Database,
+    architecture: 'Stack MERN pour le suivi industriel + Recharts',
+    description:
+      'Application web de suivi et d’exécution de la fabrication (Manufacturing Execution System) pour centraliser les données de production, équipements et indicateurs de performance clés.',
+    tech: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Recharts'],
+    images: [
+      {
+        src: `${baseUrl}mes.png`,
+        caption: 'Système MES — suivi et exécution de la production industrielle',
+      },
+    ],
+  },
+  {
+    title: 'IntelliFarm AI',
+    subtitle: 'ASSISTANT AGRICOLE INTELLIGENT RAG & AZURE IoT',
+    category: 'IA & Cloud',
+    categoryBadge: 'PROJET IA & CLOUD',
     icon: BrainCircuit,
     architecture: 'RAG + Streamlit + Azure IoT',
     description:
       'Assistant agricole intelligent s’appuyant sur l’architecture RAG (Retrieval-Augmented Generation) pour répondre avec précision aux questions métiers d’agriculteurs à partir d’une base documentaire spécialisée.',
     tech: ['Python', 'Streamlit', 'RAG', 'Vector DB', 'Azure IoT'],
+    images: [
+      {
+        src: `${baseUrl}IntelliFarm.png`,
+        caption: 'IntelliFarm AI — interface de l’assistant agricole',
+      },
+    ],
   },
   {
-    title: 'Menu Digital Café & Restaurant',
+    title: 'Site vitrine EN Digital Studio',
+    subtitle: 'SITE VITRINE & PRÉSENTATION DE L’AGENCE',
     category: 'Web Full Stack',
-    icon: UtensilsCrossed,
-    architecture: 'React.js + Node.js / QR Code',
+    categoryBadge: 'SITE WEB VITRINE',
+    icon: BriefcaseBusiness,
+    architecture: 'Site vitrine adaptatif',
     description:
-      'Application web interactive de menu digital pour café et restaurant permettant la consultation dynamique de la carte via QR Code, le filtrage par catégories (boissons, plats, desserts), la recherche instantanée et la gestion des commandes.',
-    tech: ['React.js', 'Node.js', 'Express', 'CSS Responsive', 'QR Code API'],
-  },
-  {
-    title: 'SmartPlant IA',
-    category: 'IA & Cloud',
-    icon: Sparkles,
-    architecture: 'IoT + Computer Vision TensorFlow',
-    description:
-      'Système d’irrigation connecté combinant des capteurs d’humidité du sol et un modèle de vision par ordinateur TensorFlow pour la détection précoce des pathologies foliaires.',
-    tech: ['TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'IoT ESP32'],
-  },
-  {
-    title: 'Mini système MES',
-    category: 'Web Full Stack',
-    icon: Database,
-    architecture: 'Stack MERN Industrial',
-    description:
-      'Application web de suivi et d’exécution de la fabrication (Manufacturing Execution System) pour centraliser les données de production et afficher des indicateurs de performance.',
-    tech: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Recharts'],
+      'Création d’un site vitrine pour présenter EN Digital Studio, son identité visuelle et ses services.',
+    tech: ['Site vitrine', 'Design adaptatif', 'EN Digital Studio'],
+    images: [
+      {
+        src: `${baseUrl}endigitalstudio.png`,
+        caption: 'Site vitrine EN Digital Studio',
+      },
+    ],
   },
 ]
 
@@ -222,7 +295,7 @@ const education = [
     icon: Code2,
   },
   {
-    title: 'Baccalauréat Sciences Expérimentales',
+    title: 'Baccalauréat en sciences expérimentales',
     school: 'Lycée Cité El Bosten',
     location: 'Kélibia, Nabeul, Tunisie',
     period: '2020 – 2021',
@@ -252,6 +325,201 @@ const contactLinks = [
   },
 ]
 
+function StageMediaSlider({ images, title, onOpenLightbox }) {
+  if (!images || images.length === 0) return null
+
+  return (
+    <div className="stage-thumbs-row">
+      {images.map((img, idx) => (
+        <button
+          className="stage-thumb"
+          key={idx}
+          onClick={() => onOpenLightbox(images, idx, title)}
+          title={img.caption || title}
+          type="button"
+        >
+          <img
+            alt={img.caption || title}
+            loading="lazy"
+            src={img.src}
+          />
+          <div className="stage-thumb-overlay">
+            <ZoomIn size={18} />
+          </div>
+        </button>
+      ))}
+    </div>
+  )
+}
+
+function ProjectCard({ project, index, onOpenLightbox }) {
+  const [currentIdx, setCurrentIdx] = useState(0)
+  const images = project.images || []
+  const hasImages = images.length > 0
+  const hasMultiple = images.length > 1
+  const Icon = project.icon
+
+  // Touch swipe support
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+
+  const handleTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    if (distance > 35 && hasMultiple) {
+      setCurrentIdx((prev) => (prev + 1) % images.length)
+    } else if (distance < -35 && hasMultiple) {
+      setCurrentIdx((prev) => (prev - 1 + images.length) % images.length)
+    }
+  }
+
+  const handlePrev = (e) => {
+    e.stopPropagation()
+    setCurrentIdx((prev) => (prev - 1 + images.length) % images.length)
+  }
+
+  const handleNext = (e) => {
+    e.stopPropagation()
+    setCurrentIdx((prev) => (prev + 1) % images.length)
+  }
+
+  const handleDotClick = (e, idx) => {
+    e.stopPropagation()
+    setCurrentIdx(idx)
+  }
+
+  return (
+    <article className="pro-project-card reveal">
+      {/* 01 // CATEGORY ROW (Exact match to screenshot) */}
+      <div className="pro-card-header">
+        <span className="pro-card-num">{String(index + 1).padStart(2, '0')}</span>
+        <span className="pro-card-badge">{project.categoryBadge || project.category}</span>
+      </div>
+
+      {/* MEDIA PREVIEW BOX (ONLY WHEN PROJECT HAS IMAGES) */}
+      {hasImages && (
+        <div
+          className="pro-card-media-box"
+          onTouchEnd={handleTouchEnd}
+          onTouchMove={handleTouchMove}
+          onTouchStart={handleTouchStart}
+        >
+          <div
+            className="pro-slider-viewport"
+            onClick={() => onOpenLightbox(images, currentIdx, project.title)}
+            role="button"
+            tabIndex={0}
+            title="Cliquer pour afficher l'aperçu détaillé"
+          >
+            <div
+              className="pro-slider-track"
+              style={{ transform: `translateX(-${currentIdx * 100}%)` }}
+            >
+              {images.map((img, idx) => (
+                <div className="pro-slider-slide" key={idx}>
+                  <img
+                    alt={img.caption || project.title}
+                    className="pro-slide-img"
+                    loading="lazy"
+                    src={img.src}
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Hover overlay with centered "Aperçu détaillé ↗" button (exact match to screenshot card 01) */}
+            <div className="pro-media-overlay">
+              <span className="pro-detail-pill">
+                <span>Aperçu détaillé</span>
+                <ArrowUpRight size={15} />
+              </span>
+              {hasMultiple && (
+                <span className="pro-counter-pill">
+                  {currentIdx + 1} / {images.length}
+                </span>
+              )}
+            </div>
+
+            {/* Navigation arrows for projects with 2 images */}
+            {hasMultiple && (
+              <>
+                <button
+                  aria-label="Image précédente"
+                  className="pro-slider-arrow prev"
+                  onClick={handlePrev}
+                  title="Image précédente"
+                  type="button"
+                >
+                  <ChevronLeft size={16} />
+                </button>
+                <button
+                  aria-label="Image suivante"
+                  className="pro-slider-arrow next"
+                  onClick={handleNext}
+                  title="Image suivante"
+                  type="button"
+                >
+                  <ChevronRight size={16} />
+                </button>
+                <div className="pro-slider-dots">
+                  {images.map((_, idx) => (
+                    <button
+                      aria-label={`Vue ${idx + 1}`}
+                      className={`pro-dot ${idx === currentIdx ? 'active' : ''}`}
+                      key={idx}
+                      onClick={(e) => handleDotClick(e, idx)}
+                      type="button"
+                    />
+                  ))}
+                </div>
+              </>
+            )}
+          </div>
+        </div>
+      )}
+
+      {/* CARD BODY: TITLE & SUBTITLE */}
+      <div className="pro-card-body">
+        <h3 className="pro-card-title">{project.title}</h3>
+        <p className="pro-card-subtitle">{project.subtitle}</p>
+        <p className="pro-card-desc">{project.description}</p>
+      </div>
+
+      {/* TECH TAGS */}
+      <div className="pro-card-techs">
+        {project.tech.map((tech) => (
+          <span className="pro-tech-tag" key={tech}>
+            {tech}
+          </span>
+        ))}
+      </div>
+
+      {/* FOOTER ACTION */}
+      {hasImages && (
+        <div className="pro-card-footer">
+          <button
+            className="pro-card-action-btn"
+            onClick={() => onOpenLightbox(images, currentIdx, project.title)}
+            type="button"
+          >
+            <span>Aperçu détaillé</span>
+            <ArrowUpRight size={14} />
+          </button>
+        </div>
+      )}
+    </article>
+  )
+}
+
 function App() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('hero')
@@ -260,7 +528,6 @@ function App() {
   const [isDeleting, setIsDeleting] = useState(false)
   const [showBackToTop, setShowBackToTop] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [projectFilter, setProjectFilter] = useState('Tous')
   const [formSubmitted, setFormSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submittedName, setSubmittedName] = useState('')
@@ -273,16 +540,69 @@ function App() {
 
   const [codeTab, setCodeTab] = useState('profile')
   const [copied, setCopied] = useState(false)
+  const [activeProjectImages, setActiveProjectImages] = useState({})
+  const [lightbox, setLightbox] = useState({
+    isOpen: false,
+    images: [],
+    currentIndex: 0,
+    title: '',
+  })
+
+  const openLightbox = (images, index = 0, title = '') => {
+    if (!images || images.length === 0) return
+    setLightbox({
+      isOpen: true,
+      images,
+      currentIndex: index,
+      title,
+    })
+  }
+
+  const closeLightbox = () => {
+    setLightbox((prev) => ({ ...prev, isOpen: false }))
+  }
+
+  const prevLightboxImage = () => {
+    setLightbox((prev) => ({
+      ...prev,
+      currentIndex: (prev.currentIndex - 1 + prev.images.length) % prev.images.length,
+    }))
+  }
+
+  const nextLightboxImage = () => {
+    setLightbox((prev) => ({
+      ...prev,
+      currentIndex: (prev.currentIndex + 1) % prev.images.length,
+    }))
+  }
+
+  useEffect(() => {
+    if (!lightbox.isOpen) return
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') closeLightbox()
+      if (e.key === 'ArrowLeft' && lightbox.images.length > 1) prevLightboxImage()
+      if (e.key === 'ArrowRight' && lightbox.images.length > 1) nextLightboxImage()
+    }
+
+    window.addEventListener('keydown', handleKeyDown)
+    document.body.style.overflow = 'hidden'
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = ''
+    }
+  }, [lightbox.isOpen, lightbox.images.length])
 
   const rawSnippets = {
     profile: `const profile = {
   name: "Eya Nemer",
   role: "Développeuse Full Stack & IoT",
   location: "Tunis, Tunisie",
-  status: "🟢 Recherche active d'opportunités",
+  focus: "Full Stack, IoT et IA",
   diplomes: [
-    "Master Pro Développement Services IoT (ISET Mahdia)",
-    "Licence Ingénierie Systèmes Informatiques (ISSAT Kairouan)"
+    "Master professionnel en services IoT (ISET Mahdia)",
+    "Licence en ingénierie des systèmes informatiques (ISSAT Kairouan)"
   ],
   stack: {
     web: ["React.js", "Node.js", "Laravel", "Express"],
@@ -290,10 +610,10 @@ function App() {
     ai: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"]
   },
   experiences: [
-    "PFE Master: Smart Parking IoT & Dashboard MERN",
-    "PFE Licence: SUPADATA SaaS Cartes Visite Laravel",
-    "Stage IoT: Poubelle Intelligente Tri Sélectif",
-    "Stage Web: Site E-Commerce Dynamique"
+    "Stage de fin d’études (Master) : CityParking, parking connecté (IoT, Flutter, MERN)",
+    "Stage de fin d’études (Licence) : SUPADATA, cartes de visite numériques (Laravel)",
+    "Stage de perfectionnement : SmartBin, tri sélectif connecté",
+    "Stage de perfectionnement : site e-commerce"
   ]
 };`,
     recruiter: `{
@@ -302,9 +622,9 @@ function App() {
   "availability": "🟢 Ouverte aux opportunités",
   "languages": ["Français (Courant)", "Anglais (Technique)"],
   "key_assets": [
-    "Maîtrise complète Hardware à Cloud & Frontend",
-    "Développement de Dashboards MERN Temps Réel",
-    "Rigueur, autonomie et passion des nouvelles tech"
+    "Compétences en IoT, développement web et applications Full Stack",
+    "Création de tableaux de bord MERN en temps réel",
+    "Rigueur, autonomie et intérêt pour les nouvelles technologies"
   ],
   "contact": {
     "email": "eyanemer2@gmail.com",
@@ -445,18 +765,13 @@ function App() {
     }
   }
 
-  const filteredProjects =
-    projectFilter === 'Tous'
-      ? projects
-      : projects.filter((p) => p.category === projectFilter)
-
   return (
     <div className="site-shell">
       <header className={`navbar ${isScrolled ? 'scrolled' : ''}`} id="navbar">
         <div className="nav-container">
           <a className="nav-logo" href="#hero" onClick={() => scrollToSection('hero')}>
             <span className="logo-brackets">&lt;/&gt;</span>
-            <span className="logo-name">Nemer Eya</span>
+            <span className="logo-name">Eya Nemer</span>
             <span className="logo-subbadge">Full Stack & IoT</span>
           </a>
 
@@ -500,12 +815,12 @@ function App() {
           <div className="hero-content">
             <div className="hero-badge reveal">
               <span className="badge-dot" />
-              <span>À la recherche d'opportunités</span>
+              <span>À la recherche de nouvelles opportunités</span>
             </div>
 
             <h1 className="hero-name reveal">
-              <span className="hero-firstname">Nemer</span>
-              <span>Eya</span>
+              <span className="hero-firstname">Eya</span>
+              <span>Nemer</span>
             </h1>
 
             <div className="hero-title reveal">
@@ -515,16 +830,13 @@ function App() {
             </div>
 
             <p className="hero-desc reveal">
-              Diplômée d’un Master professionnel en Développement des Services IoT,
-              je conçois et développe des applications web et mobiles ainsi que des
-              systèmes connectés, en combinant développement Full Stack, IoT et
-              intégration de solutions d’intelligence artificielle
+              Ingénieure IoT et développeuse Full Stack, titulaire d’un master professionnel en développement des services IoT. Je conçois des applications web et mobiles, des systèmes connectés et des solutions d’intelligence artificielle.
             </p>
 
             <div className="hero-recruiter-highlights reveal">
               <div className="highlight-pill">
                 <GraduationCap size={16} />
-                <span>Master professionnel en Développement des Services IoT & Licence Ingénierie des Systèmes Informatiques</span>
+                <span>Master professionnel en services IoT · Licence en systèmes informatiques</span>
               </div>
               <div className="highlight-pill">
                 <Cpu size={16} />
@@ -635,10 +947,10 @@ function App() {
                         &nbsp;&nbsp;<span className="code-key">name</span>: <span className="code-str">"Eya Nemer"</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">role</span>: <span className="code-str">"Développeuse Full Stack & IoT"</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">location</span>: <span className="code-str">"Tunis, Tunisie"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">status</span>: <span className="code-str">"🟢 Ouverte aux opportunités"</span>,<br />
+                        &nbsp;&nbsp;<span className="code-key">focus</span>: <span className="code-str">"Full Stack, IoT et IA"</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">diplomas</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Master Pro Services IoT (ISET Mahdia)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Licence Ingénierie Systèmes Informatiques"</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Master professionnel en services IoT (ISET Mahdia)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Licence en ingénierie des systèmes informatiques"</span><br />
                         &nbsp;&nbsp;],<br />
                         &nbsp;&nbsp;<span className="code-key">stack</span>: &#123;<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">web</span>: [<span className="code-str">"React"</span>, <span className="code-str">"Node"</span>, <span className="code-str">"Laravel"</span>, <span className="code-str">"Express"</span>],<br />
@@ -646,10 +958,10 @@ function App() {
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">ai</span>: [<span className="code-str">"RAG"</span>, <span className="code-str">"TensorFlow"</span>, <span className="code-str">"Streamlit"</span>]<br />
                         &nbsp;&nbsp;&#125;,<br />
                         &nbsp;&nbsp;<span className="code-key">experiences</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Master: Smart Parking IoT (MERN)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"PFE Licence: SUPADATA SaaS (Laravel)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage IoT: Tri Sélectif Intelligent"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage Web: E-Commerce Dynamique"</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de fin d'études (Master) : CityParking (MERN)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de fin d'études (Licence) : SUPADATA (Laravel)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de perfectionnement : SmartBin, tri sélectif connecté"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de perfectionnement : site e-commerce"</span><br />
                         &nbsp;&nbsp;]<br />
                         &#125;;
                       </code>
@@ -663,13 +975,13 @@ function App() {
                         &nbsp;&nbsp;<span className="code-key">"candidate"</span>: <span className="code-str">"Eya Nemer"</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">"target_roles"</span>: [<br />
                         &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Développeuse Full Stack Web / Mobile"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Ingénieure / Spécialiste IoT & Embedded"</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Développement de systèmes IoT embarqués"</span><br />
                         &nbsp;&nbsp;],<br />
                         &nbsp;&nbsp;<span className="code-key">"availability"</span>: <span className="code-str">"🟢 Ouverte aux opportunités"</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">"key_assets"</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Architecture Web complète & Dashboards MERN"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Systèmes embarqués IoT (ESP32, MQTT, Sensors)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Rigueur, esprit d'équipe et esprit solution"</span><br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Architecture web et tableaux de bord MERN"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Systèmes IoT embarqués (ESP32, MQTT, capteurs)"</span>,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Rigueur, autonomie, esprit d’équipe et sens des solutions"</span><br />
                         &nbsp;&nbsp;],<br />
                         &nbsp;&nbsp;<span className="code-key">"open_for_interview"</span>: <span className="code-bool">true</span>,<br />
                         &nbsp;&nbsp;<span className="code-key">"contact"</span>: &#123;<br />
@@ -699,11 +1011,6 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="terminal-card">
-              <Terminal size={18} />
-              <span>status: active</span>
-              <strong>Prête pour entretien & recrutement</strong>
-            </div>
           </div>
 
           <button className="hero-scroll-hint" onClick={() => scrollToSection('about')} type="button">
@@ -717,7 +1024,7 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">01 // À propos</span>
-              <h2 className="section-title">Profil & Ambition</h2>
+              <h2 className="section-title">Profil et ambition</h2>
             </div>
 
             <div className="about-grid">
@@ -760,7 +1067,7 @@ function App() {
                   </div>
                   <div className="info-item">
                     <GraduationCap size={18} />
-                    <span>Master Pro developpement des Services IoT</span>
+                    <span>Master professionnel en développement des services IoT</span>
                   </div>
                 </div>
 
@@ -778,7 +1085,7 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">02 // Compétences</span>
-              <h2 className="section-title">Stack Technique & Savoir-Faire</h2>
+              <h2 className="section-title">Stack technique et savoir-faire</h2>
             </div>
 
             <div className="skills-grid">
@@ -812,10 +1119,9 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">03 // Expériences</span>
-              <h2 className="section-title">Parcours Professionnel & Stages</h2>
+              <h2 className="section-title">Parcours professionnel et stages</h2>
               <p className="section-sub">
-                Quatre expériences de stage autour du développement Full Stack,
-                des systèmes IoT connectés et de la conception d’applications web
+                Quatre stages en développement Full Stack, en systèmes IoT connectés et en conception d’applications web.
               </p>
             </div>
 
@@ -861,6 +1167,14 @@ function App() {
                         <span key={tech}>{tech}</span>
                       ))}
                     </div>
+
+                    {experience.images && experience.images.length > 0 && (
+                      <StageMediaSlider
+                        images={experience.images}
+                        onOpenLightbox={openLightbox}
+                        title={`${experience.company} - ${experience.project}`}
+                      />
+                    )}
                   </div>
                 </article>
               ))}
@@ -873,57 +1187,21 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">04 // Projets</span>
-              <h2 className="section-title">Autres Projets Réalisés</h2>
+              <h2 className="section-title">Projets réalisés</h2>
               <p className="section-sub">
-                Projets académiques, prototypes IoT et applications web innovantes développés au cours de mon parcours.
+                Systèmes IoT connectés, plateformes web Full Stack et solutions d’intelligence artificielle réalisés au cours de mon parcours.
               </p>
             </div>
 
-            {/* Filter buttons */}
-            <div className="projects-filter reveal">
-              <Filter size={16} />
-              {['Tous', 'IA & Cloud', 'Web Full Stack'].map((cat) => (
-                <button
-                  className={`filter-btn ${projectFilter === cat ? 'active' : ''}`}
-                  key={cat}
-                  onClick={() => setProjectFilter(cat)}
-                  type="button"
-                >
-                  {cat}
-                </button>
-              ))}
-            </div>
-
             <div className="projects-grid">
-              {filteredProjects.map((project) => {
-                const Icon = project.icon
-
-                return (
-                  <article className="project-card reveal" key={project.title}>
-                    <div className="project-card-top">
-                      <div className="project-icon">
-                        <Icon size={25} />
-                      </div>
-                      <span className="project-category-badge">{project.category}</span>
-                    </div>
-
-                    <div className="project-content">
-                      <h3>{project.title}</h3>
-                      <p className="project-arch">
-                        <CircuitBoard size={16} />
-                        {project.architecture}
-                      </p>
-                      <p className="project-desc">{project.description}</p>
-                    </div>
-
-                    <div className="project-techs">
-                      {project.tech.map((tech) => (
-                        <span key={tech}>{tech}</span>
-                      ))}
-                    </div>
-                  </article>
-                )
-              })}
+              {projects.map((project, index) => (
+                <ProjectCard
+                  index={index}
+                  key={project.title}
+                  onOpenLightbox={openLightbox}
+                  project={project}
+                />
+              ))}
             </div>
           </div>
         </section>
@@ -933,7 +1211,7 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">05 // Formations</span>
-              <h2 className="section-title">Parcours Académique</h2>
+              <h2 className="section-title">Parcours académique</h2>
             </div>
 
             <div className="edu-grid">
@@ -971,9 +1249,9 @@ function App() {
           <div className="container">
             <div className="section-header reveal">
               <span className="section-tag">06 // Contact</span>
-              <h2 className="section-title">Contactez-Moi</h2>
+              <h2 className="section-title">Contactez-moi</h2>
               <p className="section-sub">
-                Je suis actuellement à la recherche de nouvelles opportunités en Développement Full Stack, IoT et projets digitaux. N’hésitez pas à me contacter !
+                Je recherche des opportunités en développement Full Stack, en IoT et dans les projets numériques. N’hésitez pas à me contacter.
               </p>
             </div>
 
@@ -1107,7 +1385,7 @@ function App() {
         <div className="container">
           <div className="footer-content">
             <a className="footer-logo" href="#hero" onClick={() => scrollToSection('hero')}>
-              Nemer Eya
+              Eya Nemer
             </a>
             <p className="footer-copy">
               Portfolio conçu et développé par <strong>EYA NEMER</strong> @2026
@@ -1128,6 +1406,92 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* LIGHTBOX MODAL */}
+      {lightbox.isOpen && (
+        <div
+          className="lightbox-overlay"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Aperçu agrandi du projet"
+        >
+          <div className="lightbox-container" onClick={(e) => e.stopPropagation()}>
+            <div className="lightbox-header">
+              <div className="lightbox-title-box">
+                <h3 className="lightbox-title">{lightbox.title}</h3>
+                {lightbox.images.length > 1 && (
+                  <span className="lightbox-counter">
+                    {lightbox.currentIndex + 1} / {lightbox.images.length}
+                  </span>
+                )}
+              </div>
+              <button
+                className="lightbox-close-btn"
+                onClick={closeLightbox}
+                type="button"
+                aria-label="Fermer"
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            <div className="lightbox-body">
+              {lightbox.images.length > 1 && (
+                <button
+                  className="lightbox-nav-btn prev"
+                  onClick={prevLightboxImage}
+                  type="button"
+                  aria-label="Image précédente"
+                >
+                  <ChevronLeft size={24} />
+                </button>
+              )}
+
+              <div className="lightbox-image-wrap">
+                <img
+                  src={lightbox.images[lightbox.currentIndex]?.src}
+                  alt={lightbox.images[lightbox.currentIndex]?.caption || lightbox.title}
+                  className="lightbox-main-img"
+                />
+              </div>
+
+              {lightbox.images.length > 1 && (
+                <button
+                  className="lightbox-nav-btn next"
+                  onClick={nextLightboxImage}
+                  type="button"
+                  aria-label="Image suivante"
+                >
+                  <ChevronRight size={24} />
+                </button>
+              )}
+            </div>
+
+            <div className="lightbox-footer">
+              <p className="lightbox-caption">
+                {lightbox.images[lightbox.currentIndex]?.caption}
+              </p>
+
+              {lightbox.images.length > 1 && (
+                <div className="lightbox-thumbs">
+                  {lightbox.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      className={`lightbox-thumb ${idx === lightbox.currentIndex ? 'active' : ''}`}
+                      onClick={() => setLightbox((prev) => ({ ...prev, currentIndex: idx }))}
+                      title={img.caption || `Vue ${idx + 1}`}
+                    >
+                      <img src={img.src} alt={`Aperçu ${idx + 1}`} />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
 
       <button
         aria-label="Retour en haut"
