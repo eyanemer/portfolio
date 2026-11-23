@@ -11,7 +11,6 @@ import {
   ChevronLeft,
   ChevronRight,
   ChevronUp,
-  CircuitBoard,
   Code2,
   Copy,
   Cpu,
@@ -20,6 +19,7 @@ import {
   Eye,
   FileCode,
   GraduationCap,
+  Github,
   Layers3,
   Linkedin,
   Loader2,
@@ -32,8 +32,8 @@ import {
   Rocket,
   Send,
   Server,
+  ShoppingBag,
   ShieldCheck,
-  Sparkles,
   Wrench,
   X,
   ZoomIn,
@@ -211,7 +211,7 @@ const projects = [
     icon: BrainCircuit,
     architecture: 'IoT ESP32 + Vision par Ordinateur TensorFlow',
     description:
-      'Système d’irrigation intelligent combinant capteurs d’humidité du sol, microcontrôleur ESP32 et modèle TensorFlow pour l’arrosage automatisé et la détection précoce des maladies foliaires.',
+      'Système d’irrigation connecté qui associe capteurs et intelligence artificielle pour surveiller les cultures et détecter les maladies foliaires.',
     tech: ['TensorFlow', 'React.js', 'Node.js', 'MongoDB', 'IoT ESP32'],
     images: [
       {
@@ -232,7 +232,7 @@ const projects = [
     icon: Database,
     architecture: 'Stack MERN pour le suivi industriel + Recharts',
     description:
-      'Application web de suivi et d’exécution de la fabrication (Manufacturing Execution System) pour centraliser les données de production, équipements et indicateurs de performance clés.',
+      'Application de suivi industriel centralisant les données de production, les équipements et les indicateurs clés dans un tableau de bord.',
     tech: ['React.js', 'Node.js', 'Express', 'MongoDB', 'Recharts'],
     images: [
       {
@@ -249,7 +249,7 @@ const projects = [
     icon: BrainCircuit,
     architecture: 'RAG + Streamlit + Azure IoT',
     description:
-      'Assistant agricole intelligent s’appuyant sur l’architecture RAG (Retrieval-Augmented Generation) pour répondre avec précision aux questions métiers d’agriculteurs à partir d’une base documentaire spécialisée.',
+      'Assistant agricole basé sur le RAG, qui aide les agriculteurs à trouver des réponses dans une base de connaissances spécialisée en agriculture.',
     tech: ['Python', 'Streamlit', 'RAG', 'Vector DB', 'Azure IoT'],
     images: [
       {
@@ -266,12 +266,29 @@ const projects = [
     icon: BriefcaseBusiness,
     architecture: 'Site vitrine adaptatif',
     description:
-      'Création d’un site vitrine pour présenter EN Digital Studio, son identité visuelle et ses services.',
+      'Site vitrine présentant l’identité, les services et l’univers visuel de l’agence EN Digital Studio.',
     tech: ['Site vitrine', 'Design adaptatif', 'EN Digital Studio'],
     images: [
       {
         src: `${baseUrl}endigitalstudio.png`,
         caption: 'Site vitrine EN Digital Studio',
+      },
+    ],
+  },
+  {
+    title: 'Site de parapharmacie',
+    subtitle: 'BOUTIQUE BEAUTÉ · SOIN · BIEN-ÊTRE',
+    category: 'E-commerce',
+    categoryBadge: 'SITE E-COMMERCE',
+    icon: ShoppingBag,
+    architecture: 'Interface de boutique en ligne',
+    description:
+      'Boutique en ligne de parapharmacie dédiée à la beauté, au soin et au bien-être, avec une mise en avant des produits, des marques et des promotions.',
+    tech: ['E-commerce', 'UI/UX Design', 'Parapharmacie'],
+    images: [
+      {
+        src: `${baseUrl}para1.png`,
+        caption: 'Site de parapharmacie — page d’accueil beauté, soin et bien-être',
       },
     ],
   },
@@ -322,6 +339,14 @@ const contactLinks = [
     value: 'eya-nemer-026275226',
     href: 'https://www.linkedin.com/in/eya-nemer-026275226',
     icon: Linkedin,
+    external: true,
+  },
+  {
+    label: 'GitHub',
+    value: '@eyanemer',
+    href: 'https://github.com/eyanemer',
+    icon: Github,
+    external: true,
   },
 ]
 
@@ -539,6 +564,7 @@ function App() {
   })
 
   const [codeTab, setCodeTab] = useState('profile')
+  const [typedCode, setTypedCode] = useState('')
   const [copied, setCopied] = useState(false)
   const [activeProjectImages, setActiveProjectImages] = useState({})
   const [lightbox, setLightbox] = useState({
@@ -642,6 +668,28 @@ function App() {
   ai_cloud: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"];
 }`
   }
+
+  const activeSnippet = rawSnippets[codeTab] || rawSnippets.profile
+
+  useEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      setTypedCode(activeSnippet)
+      return
+    }
+
+    setTypedCode('')
+    let characterIndex = 0
+    const interval = window.setInterval(() => {
+      characterIndex += 1
+      setTypedCode(activeSnippet.slice(0, characterIndex))
+
+      if (characterIndex >= activeSnippet.length) {
+        window.clearInterval(interval)
+      }
+    }, 12)
+
+    return () => window.clearInterval(interval)
+  }, [activeSnippet])
 
   const handleCopyCode = () => {
     const textToCopy = rawSnippets[codeTab] || rawSnippets.profile
@@ -868,6 +916,9 @@ function App() {
               >
                 <Linkedin size={20} />
               </a>
+              <a aria-label="GitHub" href="https://github.com/eyanemer" rel="noreferrer" target="_blank">
+                <Github size={20} />
+              </a>
               <a aria-label="Email" href="mailto:eyanemer2@gmail.com">
                 <Mail size={20} />
               </a>
@@ -877,7 +928,7 @@ function App() {
             </div>
           </div>
 
-          <div className="developer-card reveal" aria-label="Aperçu développeur pour recruteurs">
+          <div className="developer-card reveal" aria-label="Aperçu développeur">
             <div className="code-window">
               <div className="window-header">
                 <div className="window-dots">
@@ -934,80 +985,30 @@ function App() {
 
               <div className="code-editor-body">
                 <div className="line-numbers">
-                  {Array.from({ length: 22 }, (_, i) => (
+                  {Array.from({ length: typedCode.split('\n').length }, (_, i) => (
                     <span key={i + 1}>{i + 1}</span>
                   ))}
                 </div>
 
                 <div className="code-content-wrapper">
-                  {codeTab === 'profile' && (
-                    <pre>
-                      <code>
-                        <span className="code-kw">const</span> <span className="code-var">profile</span> = &#123;<br />
-                        &nbsp;&nbsp;<span className="code-key">name</span>: <span className="code-str">"Eya Nemer"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">role</span>: <span className="code-str">"Développeuse Full Stack & IoT"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">location</span>: <span className="code-str">"Tunis, Tunisie"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">focus</span>: <span className="code-str">"Full Stack, IoT et IA"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">diplomas</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Master professionnel en services IoT (ISET Mahdia)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Licence en ingénierie des systèmes informatiques"</span><br />
-                        &nbsp;&nbsp;],<br />
-                        &nbsp;&nbsp;<span className="code-key">stack</span>: &#123;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">web</span>: [<span className="code-str">"React"</span>, <span className="code-str">"Node"</span>, <span className="code-str">"Laravel"</span>, <span className="code-str">"Express"</span>],<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">iot</span>: [<span className="code-str">"ESP32"</span>, <span className="code-str">"MQTT"</span>, <span className="code-str">"RFID"</span>, <span className="code-str">"C++"</span>],<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">ai</span>: [<span className="code-str">"RAG"</span>, <span className="code-str">"TensorFlow"</span>, <span className="code-str">"Streamlit"</span>]<br />
-                        &nbsp;&nbsp;&#125;,<br />
-                        &nbsp;&nbsp;<span className="code-key">experiences</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de fin d'études (Master) : CityParking (MERN)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de fin d'études (Licence) : SUPADATA (Laravel)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de perfectionnement : SmartBin, tri sélectif connecté"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Stage de perfectionnement : site e-commerce"</span><br />
-                        &nbsp;&nbsp;]<br />
-                        &#125;;
-                      </code>
-                    </pre>
-                  )}
+                  <pre>
+                    <code>
+                      {typedCode.split(/("(?:\\.|[^"\\])*"|\b(?:const|export|interface)\b)/g).map((token, index) => {
+                        const className = token.startsWith('"')
+                          ? 'code-str'
+                          : /^(const|export|interface)$/.test(token)
+                            ? 'code-kw'
+                            : undefined
 
-                  {codeTab === 'recruiter' && (
-                    <pre>
-                      <code>
-                        &#123;<br />
-                        &nbsp;&nbsp;<span className="code-key">"candidate"</span>: <span className="code-str">"Eya Nemer"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">"target_roles"</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Développeuse Full Stack Web / Mobile"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Développement de systèmes IoT embarqués"</span><br />
-                        &nbsp;&nbsp;],<br />
-                        &nbsp;&nbsp;<span className="code-key">"availability"</span>: <span className="code-str">"🟢 Ouverte aux opportunités"</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">"key_assets"</span>: [<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Architecture web et tableaux de bord MERN"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Systèmes IoT embarqués (ESP32, MQTT, capteurs)"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-str">"Rigueur, autonomie, esprit d’équipe et sens des solutions"</span><br />
-                        &nbsp;&nbsp;],<br />
-                        &nbsp;&nbsp;<span className="code-key">"open_for_interview"</span>: <span className="code-bool">true</span>,<br />
-                        &nbsp;&nbsp;<span className="code-key">"contact"</span>: &#123;<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">"email"</span>: <span className="code-str">"eyanemer2@gmail.com"</span>,<br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="code-key">"phone"</span>: <span className="code-str">"+216 55 641 245"</span><br />
-                        &nbsp;&nbsp;&#125;<br />
-                        &#125;
-                      </code>
-                    </pre>
-                  )}
-
-                  {codeTab === 'stack' && (
-                    <pre>
-                      <code>
-                        <span className="code-kw">export interface</span> <span className="code-type">EngineerProfile</span> &#123;<br />
-                        &nbsp;&nbsp;<span className="code-key">name</span>: <span className="code-str">"Eya Nemer"</span>;<br />
-                        &nbsp;&nbsp;<span className="code-key">specialization</span>: <span className="code-str">"Full Stack & IoT"</span>;<br />
-                        &nbsp;&nbsp;<span className="code-key">frontend</span>: [<span className="code-str">"React.js"</span>, <span className="code-str">"Vite"</span>, <span className="code-str">"Flutter"</span>];<br />
-                        &nbsp;&nbsp;<span className="code-key">backend</span>: [<span className="code-str">"Node.js"</span>, <span className="code-str">"Express"</span>, <span className="code-str">"Laravel"</span>];<br />
-                        &nbsp;&nbsp;<span className="code-key">hardware</span>: [<span className="code-str">"ESP32"</span>, <span className="code-str">"MQTT"</span>, <span className="code-str">"RFID"</span>, <span className="code-str">"C++"</span>];<br />
-                        &nbsp;&nbsp;<span className="code-key">databases</span>: [<span className="code-str">"MongoDB"</span>, <span className="code-str">"MySQL"</span>];<br />
-                        &nbsp;&nbsp;<span className="code-key">ai_cloud</span>: [<span className="code-str">"RAG"</span>, <span className="code-str">"TensorFlow"</span>, <span className="code-str">"Streamlit"</span>];<br />
-                        &#125;<br />
-                      </code>
-                    </pre>
-                  )}
+                        return className ? (
+                          <span className={className} key={index}>{token}</span>
+                        ) : (
+                          <span key={index}>{token}</span>
+                        )
+                      })}
+                      <span className="code-cursor" aria-hidden="true">▍</span>
+                    </code>
+                  </pre>
                 </div>
               </div>
             </div>
@@ -1265,8 +1266,8 @@ function App() {
                       className="contact-link-card"
                       href={link.href}
                       key={link.label}
-                      rel={link.label === 'LinkedIn' ? 'noreferrer' : undefined}
-                      target={link.label === 'LinkedIn' ? '_blank' : undefined}
+                      rel={link.external ? 'noreferrer' : undefined}
+                      target={link.external ? '_blank' : undefined}
                     >
                       <div className="contact-icon">
                         <Icon size={21} />
@@ -1398,6 +1399,9 @@ function App() {
                 target="_blank"
               >
                 <Linkedin size={18} />
+              </a>
+              <a aria-label="GitHub" href="https://github.com/eyanemer" rel="noreferrer" target="_blank">
+                <Github size={18} />
               </a>
               <a aria-label="Email" href="mailto:eyanemer2@gmail.com">
                 <Mail size={18} />
