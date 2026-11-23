@@ -26,9 +26,9 @@ import {
   Mail,
   MapPin,
   Maximize2,
+  MessageCircle,
   Menu,
   MonitorCog,
-  Phone,
   Rocket,
   Send,
   Server,
@@ -267,7 +267,7 @@ const projects = [
     architecture: 'Site vitrine adaptatif',
     description:
       'Site vitrine présentant l’identité, les services et l’univers visuel de l’agence EN Digital Studio.',
-    tech: ['Site vitrine', 'Design adaptatif', 'EN Digital Studio'],
+    tech: ['React.js', 'Design adaptatif', 'EN Digital Studio'],
     images: [
       {
         src: `${baseUrl}endigitalstudio.png`,
@@ -281,10 +281,10 @@ const projects = [
     category: 'E-commerce',
     categoryBadge: 'SITE E-COMMERCE',
     icon: ShoppingBag,
-    architecture: 'Interface de boutique en ligne',
+    architecture: 'React.js + Supabase + PostgreSQL',
     description:
       'Boutique en ligne de parapharmacie dédiée à la beauté, au soin et au bien-être, avec une mise en avant des produits, des marques et des promotions.',
-    tech: ['E-commerce', 'UI/UX Design', 'Parapharmacie'],
+    tech: ['React.js', 'Supabase', 'PostgreSQL'],
     images: [
       {
         src: `${baseUrl}para1.png`,
@@ -329,10 +329,11 @@ const contactLinks = [
     icon: Mail,
   },
   {
-    label: 'Téléphone',
+    label: 'WhatsApp',
     value: '+216 55 641 245',
-    href: 'tel:+21655641245',
-    icon: Phone,
+    href: 'https://wa.me/21655641245',
+    icon: MessageCircle,
+    external: true,
   },
   {
     label: 'LinkedIn',
@@ -654,7 +655,7 @@ function App() {
   ],
   "contact": {
     "email": "eyanemer2@gmail.com",
-    "phone": "+216 55 641 245",
+    "whatsapp": "+216 55 641 245",
     "linkedin": "eya-nemer-026275226"
   }
 }`,
@@ -740,6 +741,25 @@ function App() {
         if (section) observer.observe(section)
       })
 
+    const revealElements = document.querySelectorAll('.reveal')
+    const revealObserver = new IntersectionObserver(
+      (entries, currentObserver) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible')
+            currentObserver.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+    )
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      revealElements.forEach((element) => element.classList.add('is-visible'))
+    } else {
+      revealElements.forEach((element) => revealObserver.observe(element))
+    }
+
     const onScroll = () => {
       setShowBackToTop(window.scrollY > 600)
       setIsScrolled(window.scrollY > 20)
@@ -749,6 +769,7 @@ function App() {
 
     return () => {
       observer.disconnect()
+      revealObserver.disconnect()
       window.removeEventListener('scroll', onScroll)
     }
   }, [])
@@ -922,8 +943,8 @@ function App() {
               <a aria-label="Email" href="mailto:eyanemer2@gmail.com">
                 <Mail size={20} />
               </a>
-              <a aria-label="Téléphone" href="tel:+21655641245">
-                <Phone size={20} />
+              <a aria-label="WhatsApp" href="https://wa.me/21655641245" rel="noreferrer" target="_blank">
+                <MessageCircle size={20} />
               </a>
             </div>
           </div>
