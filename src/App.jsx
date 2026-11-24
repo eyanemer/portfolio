@@ -57,47 +57,47 @@ const roles = [
 ]
 
 const stats = [
-  { value: '8+', label: 'Projets réalisés' },
+  { value: '9+', label: 'Projets réalisés' },
   { value: '4', label: 'Stages professionnels' },
-  { value: '15+', label: 'Technologies web & IoT' },
+  { value: '30+', label: 'Technologies maîtrisées' },
 ]
 
 const skillGroups = [
   {
-    title: 'Langages',
-    icon: Code2,
-    tone: 'cyan',
-    skills: ['JavaScript', 'Python', 'PHP', 'C++', 'C#', 'Java', 'SQL', 'HTML5', 'CSS3'],
-  },
-  {
-    title: 'Front-end et mobile',
+    title: 'Front-end',
     icon: Layers3,
     tone: 'blue',
-    skills: ['React.js', 'Flutter', 'Vite', 'Bootstrap', 'CSS adaptatif', 'Tableaux de bord interactifs'],
+    skills: ['React.js', 'JavaScript (ES6+)', 'HTML5', 'CSS3', 'Tailwind CSS', 'Bootstrap', 'Responsive Design'],
   },
   {
-    title: 'Back-end',
+    title: 'Back-end & API',
     icon: Server,
     tone: 'green',
-    skills: ['Node.js', 'Express.js', 'Laravel', 'REST API', 'WebSocket', '.NET'],
+    skills: ['Node.js', 'Express.js', 'API RESTful', 'Socket.IO', 'WebSocket', 'PHP', 'Laravel', 'ASP.NET'],
   },
   {
-    title: 'IoT & Embarqué',
-    icon: Cpu,
-    tone: 'orange',
-    skills: ['ESP32', 'Arduino', 'Raspberry Pi', 'MQTT', 'RFID', 'Capteurs', 'Node-RED'],
+    title: 'Bases de données',
+    icon: Database,
+    tone: 'cyan',
+    skills: ['MongoDB', 'MySQL', 'SQL Server', 'PostgreSQL', 'Supabase'],
   },
   {
-    title: 'Données, IA et cloud',
-    icon: BrainCircuit,
+    title: 'Mobile',
+    icon: MonitorCog,
     tone: 'purple',
-    skills: ['MongoDB', 'MySQL', 'SQL Server', 'TensorFlow', 'RAG', 'Streamlit', 'Azure IoT'],
+    skills: ['Flutter', 'Dart'],
   },
   {
     title: 'Outils et méthodes',
     icon: Wrench,
     tone: 'red',
-    skills: ['Git', 'Docker', 'UML', 'Scrum', 'VMware', 'Postman', 'Documentation'],
+    skills: ['Git', 'GitHub', 'Docker', 'Postman', 'MVC', 'POO', 'UML', 'Scrum', 'Agile'],
+  },
+  {
+    title: 'IoT & IA',
+    icon: Cpu,
+    tone: 'orange',
+    skills: ['ESP32', 'Arduino', 'MQTT', 'C/C++', 'RAG', 'Embeddings', 'Machine Learning', 'Streamlit'],
   },
 ]
 
@@ -243,14 +243,14 @@ const projects = [
   },
   {
     title: 'IntelliFarm AI',
-    subtitle: 'ASSISTANT AGRICOLE INTELLIGENT RAG & AZURE IoT',
-    category: 'IA & Cloud',
-    categoryBadge: 'PROJET IA & CLOUD',
+    subtitle: 'ASSISTANT AGRICOLE INTELLIGENT RAG',
+    category: 'IA & Data',
+    categoryBadge: 'PROJET IA',
     icon: BrainCircuit,
-    architecture: 'RAG + Streamlit + Azure IoT',
+    architecture: 'Python + Streamlit + RAG + Gemini + FAISS',
     description:
       'Assistant agricole basé sur le RAG, qui aide les agriculteurs à trouver des réponses dans une base de connaissances spécialisée en agriculture.',
-    tech: ['Python', 'Streamlit', 'RAG', 'Vector DB', 'Azure IoT'],
+    tech: ['Python', 'Streamlit', 'RAG', 'Gemini', 'FAISS'],
     images: [
       {
         src: `${baseUrl}IntelliFarm.png`,
@@ -632,9 +632,9 @@ function App() {
     "Licence en ingénierie des systèmes informatiques (ISSAT Kairouan)"
   ],
   stack: {
-    web: ["React.js", "Node.js", "Laravel", "Express"],
-    iot: ["ESP32", "MQTT", "RFID", "C++", "Capteurs"],
-    ai: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"]
+    web: ["React.js", "Node.js", "Express.js", "Laravel", "MongoDB"],
+    iot: ["ESP32", "Arduino", "C/C++", "MQTT", "Capteurs"],
+    ai: ["Machine Learning", "RAG", "Embeddings", "Apache Spark", "Hadoop"]
   },
   experiences: [
     "Stage de fin d’études (Master) : CityParking, parking connecté (IoT, Flutter, MERN)",
@@ -647,7 +647,7 @@ function App() {
   "candidate": "Eya Nemer",
   "target_roles": ["Développeuse Full Stack", "Ingénieure IoT & Embarqué"],
   "availability": "🟢 Ouverte aux opportunités",
-  "languages": ["Français (Courant)", "Anglais (Technique)"],
+  "languages": ["Arabe (Langue maternelle)", "Français (Courant)", "Anglais (B2)"],
   "key_assets": [
     "Compétences en IoT, développement web et applications Full Stack",
     "Création de tableaux de bord MERN en temps réel",
@@ -662,11 +662,11 @@ function App() {
     stack: `export interface EngineerProfile {
   name: "Eya Nemer";
   specialization: "Full Stack & IoT";
-  frontend: ["React.js", "Vite", "Flutter", "Bootstrap"];
-  backend: ["Node.js", "Express", "Laravel", "REST API"];
-  embedded: ["ESP32", "MQTT", "RFID", "Capteurs", "C++"];
+  frontend: ["React.js", "Tailwind CSS", "Bootstrap", "Flutter", "Dart"];
+  backend: ["Node.js", "Express.js", "Laravel", "ASP.NET", "REST API"];
+  embedded: ["ESP32", "Arduino", "MQTT", "Capteurs", "C/C++"];
   databases: ["MongoDB", "MySQL", "SQL Server"];
-  ai_cloud: ["RAG", "TensorFlow", "Streamlit", "Azure IoT"];
+  ai: ["Machine Learning", "RAG", "Embeddings", "Apache Spark", "Hadoop"];
 }`
   }
 
@@ -1074,8 +1074,8 @@ function App() {
                 </p>
                 <p>
                   Mon expertise s’étend de la conception d’applications web dynamiques (<strong>React, Node.js, Express, Laravel, PHP</strong>)
-                  au développement de systèmes IoT intelligents (<strong>ESP32, MQTT, RFID, capteurs embarqués</strong>)
-                  et à l’intégration d’outils d’IA (<strong>RAG, TensorFlow, Streamlit</strong>).
+                  au développement de systèmes IoT intelligents (<strong>ESP32, Arduino, MQTT, capteurs embarqués</strong>)
+                  et à l’intégration d’outils d’IA (<strong>RAG, Embeddings, Machine Learning</strong>).
                 </p>
                 <p>
                   Rigoureuse, curieuse et orientée résultats, j’accorde une importance majeure à l’ergonomie
